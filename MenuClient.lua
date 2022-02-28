@@ -148,7 +148,7 @@ exports['qb-menu']:openMenu({
 end)
 
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
       local sleep = 2000
       local PlayerPed = PlayerPedId()
@@ -166,6 +166,6 @@ Citizen.CreateThread(function()
                   TriggerEvent("TreyMenu")
               end
             end
-      Citizen.Wait(sleep)
+      Wait(sleep)
     end
   end)
