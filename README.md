@@ -2,7 +2,7 @@
 
 CHANGE Trey to whatever you want your menu name to be like BurgerShotMenu or PerezMenu
 
--- Example
+-- Example change Trey to whatever you like
 
 RegisterNetEvent('TreyMenu', function()
 exports['qb-menu']:openMenu({
