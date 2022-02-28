@@ -7,32 +7,43 @@ CHANGE Trey to whatever you want your menu name to be like BurgerShotMenu or Per
 RegisterNetEvent('TreyMenu', function()
 exports['qb-menu']:openMenu({
 
-Citizen.CreateThread(function()
+CreateThread(function()
+   local coord = vector3(0.0,0.0,0.0)
+    local alreadyEnteredZone = false
+    local text = ' <b>[E] </b> Open'
     while true do
-      local sleep = 2000
-      local PlayerPed = PlayerPedId()
-      local PlayerPos = GetEntityCoords(PlayerPed)
-      local Player = QBCore.Functions.GetPlayerData()
-
-      local TreyMenu = #(PlayerPos - vector3(-583.76, -881.73, 25.95))
-
-      InRange = false
-      if TreyMenu < 10 then sleep = 2 end
-      if TreyMenu < 1.0 then
-          InRange = true
-            QBCore.Functions.DrawText3D(-583.67, -882.14,25.95 ,'~g~E~w~ - Open Trey Menu')    
-              if IsControlJustPressed(0, 38) then
-                  TriggerEvent("TreyMenu")
-              end
+        wait = 5
+        local ped = PlayerPedId()
+        local inZone = false
+        local coords = GetEntityCoords(ped)
+        local dist = #(coords-coord)
+        if dist <= 1.5 then
+            wait = 5
+            inZone = true
+            if IsControlJustReleased(0, 38) then
+                TriggerEvent("OpenMenu")
             end
-      Citizen.Wait(sleep)
+        else
+            wait = 1000
+        end
+
+        if inZone and not alreadyEnteredZone then
+            alreadyEnteredZone = true
+            TriggerEvent('cd_drawtextui:ShowUI', 'show', text)
+        end
+
+        if not inZone and alreadyEnteredZone then
+            alreadyEnteredZone = false
+            TriggerEvent('cd_drawtextui:HideUI')
+        end
+        Wait(wait)
     end
-  end)
+ end)
   
   
 
 
-Draw Text Based Menus For Jobs and Much More https://github.com/your-developers
+cd_draw Text Based Menus For Jobs and Much More https://github.com/your-developers
 
 Add this code to any client side script to add a menu to a job location and many other things!
 
